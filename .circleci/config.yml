@@ -32,17 +32,17 @@ jobs:
           name: Lint relevant commit messages
           command: npm run commitlint:ci
 
-    unit-test-contracts:
-      docker:
-        - image: circleci/node:12.18.3
-        - image: trufflesuite/ganache-cli:v6.10.1
-          command: ganache-cli -e 100000000000 -l 4700038
-      steps:
-        - attach_workspace:
-            at: ~/project
-        - run:
-            name: Test TypeScript code
-            command: npm run test:contracts
+  unit-test-contracts:
+    docker:
+      - image: circleci/node:12.18.3
+      - image: trufflesuite/ganache-cli:v6.10.1
+        command: ganache-cli -e 100000000000 -l 4700038
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Test TypeScript code
+          command: npm run test:contracts
 
   build:
     docker:
