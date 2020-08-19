@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  cypress: cypress-io/cypress@1.25.1
+
 jobs:
   checkout:
     docker:
@@ -76,6 +79,9 @@ workflows:
       - unit-test-contracts:
           requires:
             - checkout
+      - cypress/run:
+          start: npm start
+          wait-on: "http://localhost:1234"
       - build:
           requires:
             - commitlint
