@@ -1,0 +1,32 @@
+{
+  "name": "web3-integration-testing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "homepage": "https://github.com/MichaelHettmer/web3-integration-testing#readme",
+  "bugs": {
+    "url": "https://github.com/MichaelHettmer/web3-integration-testing/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelHettmer/web3-integration-testing.git"
+  },
+  "license": "MIT",
+  "author": "Michael Hettmer",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "1.12.4",
+    "truffle": "5.1.41"
+  },
+  "dependencies": {
+    "web3": "1.2.11"
+  }
+}
