@@ -23,6 +23,7 @@
     "start": "parcel index.html",
     "test": "npm run test:contracts",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "test:contracts": "truffle test --network ganache",
     "test:integration": "echo \"Error: no test specified\" && exit 1"
   },
