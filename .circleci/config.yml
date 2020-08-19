@@ -80,11 +80,15 @@ workflows:
       - unit-test-contracts:
           requires:
             - checkout
+      - cypress/install:
+          requires:
+            - checkout
+          attach-workspace: true
       - cypress/run:
           start: npm start
           wait-on: "http://localhost:1234"
           requires:
-            - checkout
+            - cypress/install
           attach-workspace: true
       - build-frontend:
           requires:
