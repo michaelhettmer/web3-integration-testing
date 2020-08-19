@@ -47,7 +47,7 @@ jobs:
           name: Test solidity contracts
           command: npm run test:contracts
 
-  build:
+  build-frontend:
     docker:
       - image: circleci/node:12.18.3
     steps:
@@ -85,14 +85,16 @@ workflows:
           requires:
             - checkout
           attach-workspace: true
-      - build:
+      - build-frontend:
           requires:
-            - commitlint
-            - unit-test-contracts
+            - checkout
       - release:
           context: michaelhettmer
           requires:
-            - build
+            - commitlint
+            - build-frontend
+            - unit-test-contracts
+            - cypress/run
           filters:
             branches:
               only: master
