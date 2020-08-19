@@ -1,0 +1,86 @@
+version: 2.1
+
+jobs:
+  checkout:
+    docker:
+      - image: circleci/node:12.18.3
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  commitlint:
+    docker:
+      - image: circleci/node:12.18.3
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Lint relevant commit messages
+          command: npm run commitlint:ci
+
+  #   unit-test-contracts:
+  #     docker:
+  #       - image: circleci/node:12.18.3
+  #     steps:
+  #       - attach_workspace:
+  #           at: ~/project
+  #       - run:
+  #           name: Test TypeScript code
+  #           command: npm run test:contracts
+
+  build:
+    docker:
+      - image: circleci/node:12.18.3
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Build Frontend
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  release:
+    docker:
+      - image: circleci/node:12.18.3
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: npx semantic-release
+
+workflows:
+  build:
+    jobs:
+      - checkout
+      - commitlint:
+          requires:
+            - checkout
+      #   - unit-test-contracts:
+      #       requires:
+      #         - checkout
+      - build:
+          requires:
+            - commitlint
+            # - unit-test-contracts
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
