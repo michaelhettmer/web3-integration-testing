@@ -83,7 +83,6 @@ workflows:
       - cypress/install:
           requires:
             - checkout
-          attach-workspace: true
       - cypress/run:
           start: npm start
           wait-on: "http://localhost:1234"
