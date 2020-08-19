@@ -22,8 +22,9 @@
     "commitlint:ci": "commitlint-circle",
     "start": "parcel index.html",
     "test": "npm run test:contracts",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:ci": "start-server-and-test start http://localhost:1234 cy:run",
     "test:contracts": "truffle test --network ganache",
     "test:integration": "echo \"Error: no test specified\" && exit 1"
   },
