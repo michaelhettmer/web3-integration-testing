@@ -82,6 +82,9 @@ workflows:
       - cypress/run:
           start: npm start
           wait-on: "http://localhost:1234"
+          requires:
+            - checkout
+          attach-workspace: true
       - build:
           requires:
             - commitlint
