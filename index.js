@@ -1,34 +1,28 @@
+let account = undefined;
+
 // get ethereum web3 provider
-const initEthereum = () => {
-  if (window.ethereum) {
-    window.web3 = new Web3(window.ethereum);
-    ethereum.autoRefreshOnNetworkChange = false;
-  } else {
-    alert(
-      "Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!"
-    );
-  }
-};
-
-let accounts = undefined;
-
-/**
- * request accounts from ethereum provider and render them on the website
- */
-const requestAccounts = async () => {
+window.addEventListener("load", async () => {
   try {
-    accounts = await ethereum.request({ method: "eth_requestAccounts" });
-    var element = document.getElementById("accounts");
-    element.innerHTML = accounts.reduce(
-      (prev, cur, index) => `${prev}\nAccount ${index + 1}: ${cur}`,
-      ""
-    );
-    return accounts;
-  } catch (error) {
-    console.log(error);
-    return undefined;
-  }
-};
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      ethereum.autoRefreshOnNetworkChange = false;
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      account = accounts && accounts.length > 0 ? accounts[0] : undefined;
+    } else if (window.web3) {
+      account = window.web3.currentProvider.address;
+    } else {
+      alert(
+        "Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!"
+      );
+      return;
+    }
 
-initEthereum();
-requestAccounts();
+    // render out accounts
+    var element = document.getElementById("accounts");
+    element.innerHTML = account;
+  } catch (error) {
+    console.error(error);
+  }
+});
