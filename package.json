@@ -18,12 +18,15 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "parcel index.html",
+    "start": "parcel index.html",
     "build": "parcel build index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:contracts",
+    "test:contracts": "truffle test --network ganache",
+    "test:integration": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "parcel-bundler": "1.12.4",
+    "start-server-and-test": "1.11.3",
     "truffle": "5.1.41"
   },
   "dependencies": {
