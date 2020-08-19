@@ -81,6 +81,7 @@ workflows:
             - commitlint
             - unit-test-contracts
       - release:
+          context: michaelhettmer
           requires:
             - build
           filters:
