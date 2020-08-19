@@ -18,21 +18,23 @@
     "test": "test"
   },
   "scripts": {
-    "start": "parcel index.html",
     "build": "parcel build index.html",
+    "commitlint:ci": "commitlint-circle",
+    "start": "parcel index.html",
     "test": "npm run test:contracts",
     "test:contracts": "truffle test --network ganache",
     "test:integration": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "web3": "1.2.11"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
+    "commitlint-circle": "1.0.0",
     "parcel-bundler": "1.12.4",
     "semantic-release": "17.1.1",
     "start-server-and-test": "1.11.3",
     "truffle": "5.1.41"
-  },
-  "dependencies": {
-    "web3": "1.2.11"
   }
 }
