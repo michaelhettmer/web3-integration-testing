@@ -39,7 +39,7 @@ jobs:
   unit-test-contracts:
     docker:
       - image: circleci/node:12.18.3
-      - image: trufflesuite/ganache-cli:v6.10.1
+      - image: trufflesuite/ganache-cli:v6.10.2
         command: ganache-cli -e 100000000000 -l 6700000 -p 7545
     steps:
       - attach_workspace:
