@@ -6,7 +6,7 @@ orbs:
 jobs:
   checkout:
     docker:
-      - image: circleci/node:12.18.3
+      - image: circleci/node:17.2.0
     steps:
       - checkout
       - restore_cache:
@@ -28,7 +28,7 @@ jobs:
 
   commitlint:
     docker:
-      - image: circleci/node:12.18.3
+      - image: circleci/node:17.2.0
     steps:
       - attach_workspace:
           at: ~/project
@@ -38,7 +38,7 @@ jobs:
 
   unit-test-contracts:
     docker:
-      - image: circleci/node:12.18.3
+      - image: circleci/node:17.2.0
       - image: trufflesuite/ganache-cli:v6.10.1
         command: ganache-cli -e 100000000000 -l 6700000 -p 7545
     steps:
@@ -50,7 +50,7 @@ jobs:
 
   build-frontend:
     docker:
-      - image: circleci/node:12.18.3
+      - image: circleci/node:17.2.0
     steps:
       - attach_workspace:
           at: ~/project
@@ -64,7 +64,7 @@ jobs:
 
   release:
     docker:
-      - image: circleci/node:12.18.3
+      - image: circleci/node:17.2.0
     steps:
       - attach_workspace:
           at: ~/project
